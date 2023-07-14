@@ -18,10 +18,6 @@ class Hangman
     words.sample
   end
 
-  # def play
-  #   handle_key_press(event)
-  # end
-
   def handle_key_press(event)
     guess = event.key.downcase
 
@@ -33,7 +29,7 @@ class Hangman
         end
       else
         @incorrect_guesses << guess
-        if lost?
+        if loss?
           @game_over = true
         end
       end
@@ -48,7 +44,7 @@ class Hangman
     visible_word == @word
   end
 
-  def lost?
+  def loss?
     @incorrect_guesses.length >= @max_guesses
   end
 
@@ -84,7 +80,7 @@ class Hangman
   end
 
   def display_game_over
-    if lost?
+    if loss?
       Text.new("GAME OVER", color:'red', x: 200, y: 100, size: 60)
       Text.new("The word was: #{@word}", color:'black', x: 220, y: 200, size: 30)
       Text.new(message, color:'black', x: 220, y: 300, size: 30)
